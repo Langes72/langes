@@ -15,7 +15,6 @@ device+=(urushi_i)
 
 #Setup log file and log terminal output
 t1=$(date +%d-%m-%y_%R)
-echo -e $t1
 exec >> "logs/${t1}.log" #2>&1
 
 ./build.py -ftv ${device[@]}
