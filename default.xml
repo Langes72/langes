@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 
-  <!-- Main remote -->
   <remote  name="langes"
            fetch="https://github.com/Langes72"
 
-  <!-- Generic github remote -->
   <remote  name="github"
            fetch="https://github.com" />
 
