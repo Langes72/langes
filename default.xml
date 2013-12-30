@@ -10,7 +10,7 @@
            sync-c="true"
            sync-j="8" />
 
-  <project path="langes" name="langes" remote="github" revision="43" >
+  <project path="langes" name="langes" remote="github" >
     <copyfile src="langes/build-all.sh" dest="build-all.sh" />
   </project>
 
