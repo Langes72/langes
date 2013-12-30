@@ -2,7 +2,7 @@
 <manifest>
 
   <remote  name="langes"
-           fetch="https://github.com/Langes72"
+           fetch="https://github.com/Langes72" />
 
   <remote  name="github"
            fetch="https://github.com" />
