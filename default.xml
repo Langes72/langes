@@ -5,8 +5,7 @@
   <remote  name="github"
            fetch="https://github.com" />
 
-  <default revision="refs/heads/43"
-           remote="github"
+  <default remote="github"
            sync-c="true"
            sync-j="8" />
 
