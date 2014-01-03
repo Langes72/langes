@@ -55,6 +55,11 @@ findn = 'ro.pacrom.version='
 # Create log file
 lf = open('logs/build_log-%s.txt' % (ta), 'w')
 
+# Fetch cherry-picks
+if args.cherries:
+    cmd = './cherries.sh'
+    execute_cmd(cmd)
+
 # Iterate through the requested devices
 for argument in args.build:
     device, opt = argument.split('_', 1)
