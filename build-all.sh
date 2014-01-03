@@ -4,7 +4,7 @@
 # that calls the PAC-rom build script with the said arguments one-by-one
 
 #devices to build
-device+=(anzu_ci)
+device+=(anzu_cfi)
 device+=(coconut_i)
 device+=(haida_i)
 device+=(hallon_i)
@@ -17,4 +17,4 @@ device+=(urushi_i)
 t1=$(date +%d-%m-%y_%R)
 exec >> "logs/${t1}.log" #2>&1
 
-./build.py -ftv ${device[@]}
+./build.py -v ${device[@]}
