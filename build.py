@@ -47,7 +47,7 @@ def execute_cmd(cmd):
 ta = datetime.datetime.now().replace(microsecond=0)
 
 # Declare "fixed" variables
-out = '~/pac43/out/target/product'
+out = 'out/target/product'
 uf = open('upload', 'r')
 ncft = uf.read()
 findn = 'ro.pacrom.version='
