@@ -87,7 +87,7 @@ for argument in args.build:
     if not args.test:
         upm='%s.zip.md5sum' % (fname)
         upz='%s.zip' % (fname)
-        if not os.path.isfile('%s/product/%s/%s' % (out, device, upm)):
+        if not os.path.isfile('%s/%s/%s' % (out, device, upm)):
             print('Building of %s failed' % (device))
             continue;
 
