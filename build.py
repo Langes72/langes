@@ -92,9 +92,9 @@ for argument in args.build:
             continue;
 
         print('Uploading %s files' % (device), file=lf)
-        cmd = '%s/%s/nightly %s/product/%s/%s' % (ncft, device, out, device, upm)
+        cmd = '%s/%s/nightly %s/%s/%s' % (ncft, device, out, device, upm)
         execute_cmd(cmd)
-        cmd = '%s/%s/nightly %s/product/%s/%s' % (ncft, device, out, device, upz)
+        cmd = '%s/%s/nightly %s/%s/%s' % (ncft, device, out, device, upz)
         execute_cmd(cmd)
         t3 = datetime.datetime.now().replace(microsecond=0)
         dt = (t3-t2)
