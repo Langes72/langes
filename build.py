@@ -46,12 +46,6 @@ def execute_cmd(cmd):
 # Get start time
 ta = datetime.datetime.now().replace(microsecond=0)
 
-# Declare "fixed" variables
-out = 'out/target/product'
-uf = open('upload', 'r')
-ncft = uf.read()
-findn = 'ro.pacrom.version='
-
 # Create log file
 lf = open('logs/build_log-%s.txt' % (ta), 'w')
 
@@ -73,29 +67,11 @@ for argument in args.build:
     dt = (t2-t1)
     print('Build time for %s was: %s' % (device, dt), file=lf)
 
-    # get build file names
-    fname = '%s/%s/system/build.prop' % (out, device)
-    if not os.path.isfile(fname):
-        print('Building of %s failed' % (device))
-        continue;
-
-    PACVERSION = "grep '%s' %s/%s/system/build.prop | sed -e 's/%s//g'" % (findn, out, device, findn)
-    process = subprocess.Popen(PACVERSION, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    fname = process.communicate()[0]
-
     # upload
     if not args.test:
-        upm='%s.zip.md5sum' % (fname)
-        upz='%s.zip' % (fname)
-        if not os.path.isfile('%s/%s/%s' % (out, device, upm)):
-            print('Building of %s failed' % (device))
-            continue;
-
         print('Uploading %s files' % (device), file=lf)
-        cmd = '%s/%s/nightly %s/%s/%s' % (ncft, device, out, device, upm)
-        execute_cmd(cmd)
-        cmd = '%s/%s/nightly %s/%s/%s' % (ncft, device, out, device, upz)
-        execute_cmd(cmd)
+        cmd = ('./up.py %s' % (device))
+        subprocess.call(cmd, shell=True)
         t3 = datetime.datetime.now().replace(microsecond=0)
         dt = (t3-t2)
         print('Upload time for %s was: %s' % (device, dt), file=lf)
