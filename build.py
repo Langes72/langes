@@ -10,6 +10,8 @@ import argparse
 import textwrap
 import datetime
 import time
+import os.path
+import shutil
 
 # Parse the command line
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description=textwrap.dedent('''\
@@ -70,7 +72,7 @@ for argument in args.build:
     # upload
     if not args.test:
         print('Uploading %s files' % (device), file=lf)
-        cmd = ('./up.py %s' % (device))
+        cmd = ('./up.sh %s' % (device))
         subprocess.call(cmd, shell=True)
         t3 = datetime.datetime.now().replace(microsecond=0)
         dt = (t3-t2)
@@ -80,3 +82,4 @@ for argument in args.build:
 tz = datetime.datetime.now().replace(microsecond=0)
 dt = (tz-ta)
 print('\nBuild-bot time was: %s' % (dt), file=lf)
+shutil.move(lf, /var/www/users/langes)
