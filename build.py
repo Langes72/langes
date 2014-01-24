@@ -82,4 +82,5 @@ for argument in args.build:
 tz = datetime.datetime.now().replace(microsecond=0)
 dt = (tz-ta)
 print('\nBuild-bot time was: %s' % (dt), file=lf)
+lf.close()
 shutil.move(lf, /var/www/users/langes)
