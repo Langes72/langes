@@ -5,13 +5,14 @@
 
 #devices to build
 device+=(anzu_fcio3)
-device+=(coconut_io3)
-device+=(haida_io3)
-device+=(hallon_io3)
-device+=(iyokan_io3)
-device+=(satsuma_io3)
-device+=(smultron_io3)
-device+=(urushi_io3)
+device+=(coconut_cio3)
+device+=(haida_cio3)
+device+=(hallon_cio3)
+device+=(iyokan_cio3)
+device+=(mango_cio3)
+device+=(satsuma_cio3)
+device+=(smultron_cio3)
+device+=(urushi_cio3)
 
 #Setup log file and log terminal output
 t1=$(date +%d-%m-%y_%R)
