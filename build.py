@@ -22,7 +22,6 @@ parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpForm
     (usually cherries.sh) and this script calls repopick.py
     located in the /build/tools folder'''))
 parser.add_argument('build', nargs='+', help='device to build with option switches')
-parser.add_argument('-f', '--cherries', action='store_true', help='do a cherry-pick first')
 parser.add_argument('-q', '--quiet', action='store_true', help='print as little as possible')
 parser.add_argument('-t', '--test', action='store_true', help='test build, no uploads')
 parser.add_argument('-v', '--verbose', action='store_true', help='print extra information to aid in debug')
@@ -45,38 +44,62 @@ def execute_cmd(cmd):
             print('\nCommand that failed:\n%s' % cmd, file=lf)
         sys.exit(1)
 
+# Variables
+out = 'out/target/product'
+findn = 'ro.pacrom.version='
+
 # Get start time
 ta = datetime.datetime.now().replace(microsecond=0)
+td = (time.strftime("%d-%m-%Y"))
+up_dir = ('build_files_%s' % (td))
+if not os.path.exists(up_dir):
+    os.makedirs(up_dir)
 
 # Create log file
-lf = open('logs/build_log-%s.txt' % (ta), 'w')
-
-# Fetch cherry-picks
-if args.cherries:
-    cmd = './cherries.sh'
-    execute_cmd(cmd)
+lf = open('%s/build_log-%s.txt' % (up_dir, ta), 'w')
+print('Building started at: %s\n' % (ta), file=lf)
 
 # Iterate through the requested devices
 for argument in args.build:
+    # parse device and arguments
     device, opt = argument.split('_', 1)
 
     # build device
     print('\nBuilding %s\n' % (device), file=lf)
     t1 = datetime.datetime.now().replace(microsecond=0)
-    cmd = './build-pac.sh -%s %s' % (opt, device)
-    execute_cmd(cmd)
+    cmd = ('./build-pac.sh -%s %s' % (opt, device))
+    with open('%s/%s-log' % (up_dir, device), 'w') as dlf:
+        subprocess.call(cmd, stdout=dlf,  shell=True)
     t2 = datetime.datetime.now().replace(microsecond=0)
     dt = (t2-t1)
+
+    # get build file names
+    fname = '%s/%s/system/build.prop' % (out, device)
+    if not os.path.isfile(fname):
+        print('Building of %s failed' % (device), file=lf)
+        continue;
+    fl_prop = open(fname, "r")
+    for line in fl_prop:
+        if findn in line:
+            PACVERSION = line.replace(findn, '').strip()
+            rom = PACVERSION + '.zip'
+            rompath = '%s/%s/%s' % (out, device, rom)
+    if not os.path.isfile(rompath):
+        print('Building of %s failed' % (device), file=lf)
+        print('Build time for %s was: %s' % (device, dt), file=lf)
+        continue;
     print('Build time for %s was: %s' % (device, dt), file=lf)
 
     # upload
     if not args.test:
         print('Uploading %s files' % (device), file=lf)
-        cmd = ('./up.sh %s' % (device))
+        cmd = ('./up.sh %s %s' % (device, up_dir))
         subprocess.call(cmd, shell=True)
         t3 = datetime.datetime.now().replace(microsecond=0)
-        dt = (t3-t2)
-        print('Upload time for %s was: %s' % (device, dt), file=lf)
+        print('Upload added to spool at %s' % (t3), file=lf)
+
+    # pause before starting next build
+    time.sleep(5)
 
 # Get duration
 tz = datetime.datetime.now().replace(microsecond=0)
