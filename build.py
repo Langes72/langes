@@ -50,14 +50,14 @@ findn = 'ro.pacrom.version='
 
 # Get start time
 ta = datetime.datetime.now().replace(microsecond=0)
-td = (time.strftime("%d-%m-%Y"))
+td = (time.strftime("%Y-%m-%d"))
 up_dir = ('build_files_%s' % (td))
 if not os.path.exists(up_dir):
     os.makedirs(up_dir)
 
 # Create log file
 lf = open('%s/build_log-%s.txt' % (up_dir, ta), 'w')
-print('Building started at: %s\n' % (ta), file=lf)
+print('Building started at: %s' % (ta), file=lf)
 
 # Iterate through the requested devices
 for argument in args.build:
@@ -69,7 +69,7 @@ for argument in args.build:
     t1 = datetime.datetime.now().replace(microsecond=0)
     cmd = ('./build-pac.sh -%s %s' % (opt, device))
     with open('%s/%s-log' % (up_dir, device), 'w') as dlf:
-        subprocess.call(cmd, stdout=dlf,  shell=True)
+        subprocess.call(cmd, stdout=dlf, stderr=subprocess.STDOUT, shell=True)
     t2 = datetime.datetime.now().replace(microsecond=0)
     dt = (t2-t1)
 
@@ -105,4 +105,5 @@ for argument in args.build:
 tz = datetime.datetime.now().replace(microsecond=0)
 dt = (tz-ta)
 print('\nBuild-bot time was: %s' % (dt), file=lf)
+print('\nBuild-bot time was: %s' % (dt))
 lf.close()
