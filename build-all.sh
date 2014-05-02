@@ -4,18 +4,14 @@
 # that calls the PAC-rom build script with the said arguments one-by-one
 
 #devices to build
-device+=(anzu_fcio3)
-device+=(coconut_cio3)
-device+=(haida_cio3)
-device+=(hallon_cio3)
-device+=(iyokan_cio3)
-device+=(mango_cio3)
-device+=(satsuma_cio3)
-device+=(smultron_cio3)
-device+=(urushi_cio3)
-
-#Setup log file and log terminal output
-t1=$(date +%d-%m-%y_%R)
-exec >> "logs/${t1}.log" #2>&1
+device+=(anzu_co3)
+device+=(coconut_co3)
+device+=(haida_co3)
+device+=(hallon_co3)
+device+=(iyokan_co3)
+device+=(mango_co3)
+device+=(satsuma_co3)
+device+=(smultron_co3)
+device+=(urushi_co3)
 
 ./build.py -v ${device[@]}
