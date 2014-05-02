@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 from __future__ import print_function
 
 import sys
@@ -16,11 +17,11 @@ import shutil
 # Parse the command line
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description=textwrap.dedent('''\
     a build-bot tool by Werner Gerber
-    arguments are passed from a bash script
+    build arguments are passed from a bash script
     (usually build-all.sh)
-    cherry-picks are specified in another bash script file
-    (usually cherries.sh) and this script calls repopick.py
-    located in the /build/tools folder'''))
+    an upload script is called from here that moves 
+    successfull builds to a log folder so the out
+    folder can safely be cleaned for the next build'''))
 parser.add_argument('build', nargs='+', help='device to build with option switches')
 parser.add_argument('-q', '--quiet', action='store_true', help='print as little as possible')
 parser.add_argument('-t', '--test', action='store_true', help='test build, no uploads')
