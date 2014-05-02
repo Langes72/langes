@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# moves build files to the logs folder for background uploading. The out folder can be cleaned after
+# as the build file is no longer residing there
+
 device="$1"
 up_dir="$2"
 pacversion=$(grep 'ro.pacrom.version' /home/langes/pac44/out/target/product/$device/system/build.prop | sed -e 's/ro.pacrom.version=//g')
