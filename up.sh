@@ -12,8 +12,8 @@ md5="$rom".md5sum
 mv /home/langes/pac44/out/target/product/$device/$md5 /home/langes/pac44/$up_dir/$md5
 mv /home/langes/pac44/out/target/product/$device/$rom /home/langes/pac44/$up_dir/$rom
 
-ncftpput -bb pacman public_html/main/$device/nightly /home/langes/pac44/$up_dir/$md5
-ncftpput -bb pacman public_html/main/$device/nightly /home/langes/pac44/$up_dir/$rom
+ncftpput -bb -f basket public_html/main/$device/nightly /home/langes/pac44/$up_dir/$md5
+ncftpput -bb -f basket public_html/main/$device/nightly /home/langes/pac44/$up_dir/$rom
 batchid=$(pgrep ncftpbatch)
 if [[ -z $batchid ]]; then
     ncftpbatch -d
