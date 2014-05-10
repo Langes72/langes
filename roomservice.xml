@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remove-project name="androidarmv6/android_hardware_qcom_display-legacy" />
+  <remove-project name="androidarmv6/android_hardware_qcom_media-legacy" />
+  <remove-project name="android_frameworks_webview" />
+  <remove-project name="android_frameworks_av" />
+  <remove-project name="android_hardware_qcom_audio-caf" />
+  <remove-project name="android_packages_apps_Browser" />
+  <remove-project name="android_vendor_pac" />
+  <project name="CyanogenMod/android_hardware_sony_DASH" path="hardware/sony/DASH" revision="cm-11.0" />
+  <project name="Langes72/android_device_semc_msm7x30-common" path="device/semc/msm7x30-common" revision="cm-11.0" />
+  <project name="Langes72/android_vendor_pac" path="vendor/pac" remote="github" revision="pac-4.4" />
+  <project name="Langes72/android_device_semc_anzu" path="device/semc/anzu" revision="cm-11.0" />
+  <project name="Langes72/android_device_semc_coconut" path="device/semc/coconut" remote="github" revision="cm-11.0" />
+  <project name="Langes72/android_device_semc_haida" path="device/semc/haida" remote="github" revision="cm-11.0" />
+  <project name="Langes72/android_device_semc_hallon" path="device/semc/hallon" remote="github" revision="cm-11.0" />
+  <project name="Langes72/android_device_semc_iyokan" path="device/semc/iyokan" remote="github" revision="cm-11.0" />
+  <project name="Langes72/android_device_semc_mango" path="device/semc/mango" remote="github" revision="cm-11.0" />
+  <project name="LegacyXperia/android_device_semc_mogami-common" path="device/semc/mogami-common" revision="cm-11.0" />
+  <project name="Langes72/android_device_semc_satsuma" path="device/semc/satsuma" remote="github" revision="cm-11.0" />
+  <project name="Langes72/android_device_semc_smultron" path="device/semc/smultron" remote="github" revision="cm-11.0" />
+  <project name="Langes72/android_device_semc_urushi" path="device/semc/urushi" revision="cm-11.0" />
+  <project name="LegacyXperia/android_external_webkit" path="external/webkit" remote="github" revision="cm-11.0" />
+  <project name="LegacyXperia/android_frameworks_webview" path="frameworks/webview" remote="github" revision="cm-11.0" />
+  <project name="LegacyXperia/android_frameworks_av" path="frameworks/av" remote="github" revision="cm-11.0" />
+  <project name="LegacyXperia/android_hardware_qcom_audio-caf" path="hardware/qcom/audio-caf" revision="cm-11.0" />
+  <project name="LegacyXperia/android_hardware_qcom_display-legacy" path="hardware/qcom/display-legacy" remote="github" revision="cm-11.0_old" />
+  <project name="LegacyXperia/android_hardware_qcom_media-legacy" path="hardware/qcom/media-legacy" remote="github" revision="cm-11.0_old" />
+  <project name="LegacyXperia/android_packages_apps_Browser" path="packages/apps/Browser" remote="github" revision="cm-11.0" />
+  <project name="vishal-android-freak/msm7x30-3.4.x-nAa" path="kernel/semc/msm7x30" revision="cm-11.0" />
+  <project name="vishal-android-freak/proprietary_vendor_semc" path="vendor/semc" remote="github" revision="cm-11.0" />
+</manifest>
