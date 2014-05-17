@@ -14,4 +14,4 @@ device+=(satsuma_c1)
 device+=(smultron_c1)
 device+=(urushi_c1)
 
-./build.py -v ${device[@]}
+./langes/build.py -v ${device[@]}

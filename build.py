@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 from __future__ import print_function
 
 import sys
@@ -19,7 +18,7 @@ parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpForm
     a build-bot tool by Werner Gerber
     build arguments are passed from a bash script
     (usually build-all.sh)
-    an upload script is called from here that moves 
+    an upload script is called from here that moves
     successfull builds to a log folder so the out
     folder can safely be cleaned for the next build'''))
 parser.add_argument('build', nargs='+', help='device to build with option switches')
@@ -66,7 +65,7 @@ for argument in args.build:
     device, opt = argument.split('_', 1)
 
     # build device
-    print('\nBuilding %s\n' % (device), file=lf)
+    print('\nBuilding %s\n' % (device))
     t1 = datetime.datetime.now().replace(microsecond=0)
     cmd = ('./build-pac.sh -%s %s' % (opt, device))
     with open('%s/%s-log' % (up_dir, device), 'w') as dlf:
