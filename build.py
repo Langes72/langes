@@ -93,7 +93,7 @@ for argument in args.build:
     # upload
     if not args.test:
         print('Uploading %s files' % (device), file=lf)
-        cmd = ('./up.sh %s %s' % (device, up_dir))
+        cmd = ('./langes/up.sh %s %s' % (device, up_dir))
         subprocess.call(cmd, shell=True)
         t3 = datetime.datetime.now().replace(microsecond=0)
         print('Upload added to spool at %s' % (t3), file=lf)
