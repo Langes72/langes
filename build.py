@@ -45,7 +45,7 @@ def execute_cmd(cmd):
         sys.exit(1)
 
 # Variables
-out = 'out/target/product'
+out = '/mnt/out/langes/pac44/target/product'
 findn = 'ro.pacrom.version='
 
 # Get start time
