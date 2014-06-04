@@ -45,7 +45,12 @@ def execute_cmd(cmd):
         sys.exit(1)
 
 # Variables
-out = '/mnt/out/langes/pac44/target/product'
+out = os.environ.get('OUT_DIR_COMMON_BASE')
+if out == None:
+	out = os.getcwd() + '/out/target/product'
+else:
+	out = out + "/" + os.path.basename(os.getcwd()) + '/target/product'
+print(out)
 findn = 'ro.pacrom.version='
 
 # Get start time
