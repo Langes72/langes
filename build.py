@@ -50,13 +50,13 @@ if out == None:
 	out = os.getcwd() + '/out/target/product'
 else:
 	out = out + "/" + os.path.basename(os.getcwd()) + '/target/product'
-print(out)
+print('Building to %s...' % (out))
 findn = 'ro.pacrom.version='
 
 # Get start time
 ta = datetime.datetime.now().replace(microsecond=0)
 td = (time.strftime("%Y-%m-%d"))
-up_dir = ('build_files_%s' % (td))
+up_dir = (os.getcwd() + '/build_files_%s' % (td))
 if not os.path.exists(up_dir):
     os.makedirs(up_dir)
 

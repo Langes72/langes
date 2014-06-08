@@ -15,8 +15,8 @@ pacversion=$(grep 'ro.pacrom.version' $out/$device/system/build.prop | sed -e 's
 rom="$pacversion".zip
 md5="$rom".md5sum
 
-mv /$out/$device/$md5 /home/langes/pac44/$up_dir/$md5
-mv /$out/$device/$rom /home/langes/pac44/$up_dir/$rom
+mv /$out/$device/$md5 $up_dir/$md5
+mv /$out/$device/$rom $up_dir/$rom
 
 ncftpput -bb -f basket $device/nightly /home/langes/pac44/$up_dir/$md5
 ncftpput -bb -f basket $device/nightly /home/langes/pac44/$up_dir/$rom

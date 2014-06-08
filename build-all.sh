@@ -4,7 +4,7 @@
 # that calls the PAC-rom build script with the said arguments one-by-one
 
 #devices to build
-device+=(anzu_c3)
+device+=(anzu_fc3)
 device+=(coconut_c3)
 device+=(haida_c3)
 device+=(hallon_c3)
