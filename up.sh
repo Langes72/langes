@@ -18,8 +18,8 @@ md5="$rom".md5sum
 mv /$out/$device/$md5 $up_dir/$md5
 mv /$out/$device/$rom $up_dir/$rom
 
-ncftpput -bb -f basket $device/nightly /home/langes/pac44/$up_dir/$md5
-ncftpput -bb -f basket $device/nightly /home/langes/pac44/$up_dir/$rom
+ncftpput -bb -f basket $device/nightly $up_dir/$md5
+ncftpput -bb -f basket $device/nightly $up_dir/$rom
 batchid=$(pgrep ncftpbatch)
 if [[ -z $batchid ]]; then
     ncftpbatch -d

@@ -63,6 +63,8 @@ if not os.path.exists(up_dir):
 # Create log file
 lf = open('%s/build_log-%s.txt' % (up_dir, ta), 'w')
 print('Building started at: %s' % (ta), file=lf)
+if args.verbose:
+	print('Building started at: %s' % (ta))
 
 # Iterate through the requested devices
 for argument in args.build:
@@ -82,6 +84,8 @@ for argument in args.build:
     fname = '%s/%s/system/build.prop' % (out, device)
     if not os.path.isfile(fname):
         print('Building of %s failed' % (device), file=lf)
+        if args.verbose:
+			print('Building of %s failed' % (device))
         continue;
     fl_prop = open(fname, "r")
     for line in fl_prop:
@@ -92,8 +96,13 @@ for argument in args.build:
     if not os.path.isfile(rompath):
         print('Building of %s failed' % (device), file=lf)
         print('Build time for %s was: %s' % (device, dt), file=lf)
+        if args.verbose:
+			print('Building of %s failed' % (device))
+			print('Build time for %s was: %s' % (device, dt))
         continue;
     print('Build time for %s was: %s' % (device, dt), file=lf)
+    if args.verbose:
+		print('Build time for %s was: %s' % (device, dt))
 
     # upload
     if not args.test:
@@ -102,6 +111,8 @@ for argument in args.build:
         subprocess.call(cmd, shell=True)
         t3 = datetime.datetime.now().replace(microsecond=0)
         print('Upload added to spool at %s' % (t3), file=lf)
+        if args.verbose:
+			print('Upload added to spool at %s' % (t3))
 
     # pause before starting next build
     time.sleep(5)
