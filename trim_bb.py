@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 
-# Made for PAC_ROM to trim the old nightlies from the file server (BasketBuild)
-# checks the nightly folder of each device and deletes the oldest nightlies
-# and their md5 files if there are more nightlies than specified
-
 from __future__ import print_function
 
 import sys
@@ -24,21 +20,20 @@ generated'''))
 parser.add_argument('-m', '--max_zip', nargs=1, help='the number of files to keep')
 parser.add_argument('-d', '--dir_del', nargs=1, help='the directory name to scan for')
 parser.add_argument('-e', '--extensions', nargs=1, help='the file types to scan for')
-parser.add_argument('-c', '--clean_up', nargs=1, help='removes broken uploads and creates missing md5 files')
+parser.add_argument('-c', '--clean_up', nargs=1, help='removes broken uploads and creates missing md5 files in the specified directory')
 args = parser.parse_args()
+
+# Set some variables
 if not args.max_zip:
     args.max_zip = [10]
 args.max_zip = int(args.max_zip[0])
-
 if not args.dir_del:
     args.dir_del = ["nightly"]
 args.dir_del = args.dir_del[0]
-
 if not args.extensions:
     args.extensions = ['.zip', '.md5sum']
-
 root = os.path.dirname(os.path.realpath(__file__))
-to_small = 180000000
+to_small = 180000000 #bytes
 
 # Find all directories named nightly
 def find_nightly_dirs():
@@ -116,6 +111,7 @@ def gen_md5file(zip_file):
     with open(md5_file, 'w') as new_file:
         new_file.write(read_md5sum(zip_file) + '  %s\n' % (os.path.basename(zip_file)))
 
+# local folder clean-up
 if args.clean_up:
     ful_path = ('%s/%s' % (root, args.clean_up[0]))
     clean_broken(ful_path)
