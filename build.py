@@ -47,9 +47,9 @@ def execute_cmd(cmd):
 # Variables
 out = os.environ.get('OUT_DIR_COMMON_BASE')
 if out == None:
-	out = os.getcwd() + '/out/target/product'
+    out = os.getcwd() + '/out/target/product'
 else:
-	out = out + "/" + os.path.basename(os.getcwd()) + '/target/product'
+    out = out + "/" + os.path.basename(os.getcwd()) + '/target/product'
 print('Building to %s...' % (out))
 findn = 'ro.pacrom.version='
 
@@ -61,10 +61,10 @@ if not os.path.exists(up_dir):
     os.makedirs(up_dir)
 
 # Create log file
-lf = open('%s/build_log-%s.txt' % (up_dir, ta), 'w')
+lf = open('%s/build_log-%s.txt' % (up_dir, td), 'w')
 print('Building started at: %s' % (ta), file=lf)
 if args.verbose:
-	print('Building started at: %s' % (ta))
+    print('Building started at: %s' % (ta))
 
 # Iterate through the requested devices
 for argument in args.build:
@@ -85,7 +85,7 @@ for argument in args.build:
     if not os.path.isfile(fname):
         print('Building of %s failed' % (device), file=lf)
         if args.verbose:
-			print('Building of %s failed' % (device))
+            print('Building of %s failed' % (device))
         continue;
     fl_prop = open(fname, "r")
     for line in fl_prop:
@@ -97,12 +97,12 @@ for argument in args.build:
         print('Building of %s failed' % (device), file=lf)
         print('Build time for %s was: %s' % (device, dt), file=lf)
         if args.verbose:
-			print('Building of %s failed' % (device))
-			print('Build time for %s was: %s' % (device, dt))
+            print('Building of %s failed' % (device))
+            print('Build time for %s was: %s' % (device, dt))
         continue;
     print('Build time for %s was: %s' % (device, dt), file=lf)
     if args.verbose:
-		print('Build time for %s was: %s' % (device, dt))
+        print('Build time for %s was: %s' % (device, dt))
 
     # upload
     if not args.test:
@@ -112,7 +112,7 @@ for argument in args.build:
         t3 = datetime.datetime.now().replace(microsecond=0)
         print('Upload added to spool at %s' % (t3), file=lf)
         if args.verbose:
-			print('Upload added to spool at %s' % (t3))
+            print('Upload added to spool at %s' % (t3))
 
     # pause before starting next build
     time.sleep(5)
