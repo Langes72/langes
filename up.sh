@@ -11,16 +11,15 @@ fi
 
 device="$1"
 up_dir="$2"
-pacversion=$(grep 'ro.pacrom.version' $out/$device/system/build.prop | sed -e 's/ro.pacrom.version=//g')
-rom="$pacversion".zip
+rom="$3"
 md5="$rom".md5sum
 
-mv /$out/$device/$md5 $up_dir/$md5
-mv /$out/$device/$rom $up_dir/$rom
+mv $out/$device/$md5 $up_dir/$md5
+mv $out/$device/$rom $up_dir/$rom
 
-ncftpput -bb -f basket $device/nightly $up_dir/$md5
-ncftpput -bb -f basket $device/nightly $up_dir/$rom
-batchid=$(pgrep ncftpbatch)
+ncftpbatch -bb -f basket $device/Unofficial $up_dir/$md5
+ncftpbatch -bb -f basket $device/Unofficial $up_dir/$rom
+batchid=$(pgrep ncftpspooler)
 if [[ -z $batchid ]]; then
     ncftpbatch -d
 fi
