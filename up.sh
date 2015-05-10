@@ -17,8 +17,8 @@ md5="$rom".md5sum
 mv $out/$device/$md5 $up_dir/$md5
 mv $out/$device/$rom $up_dir/$rom
 
-ncftpbatch -bb -f basket $device/Unofficial $up_dir/$md5
-ncftpbatch -bb -f basket $device/Unofficial $up_dir/$rom
+ncftpput -bb -f basket $device/Unofficial $up_dir/$md5
+ncftpput -bb -f basket $device/Unofficial $up_dir/$rom
 batchid=$(pgrep ncftpspooler)
 if [[ -z $batchid ]]; then
     ncftpbatch -d
