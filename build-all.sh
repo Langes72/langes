@@ -1,19 +1,23 @@
 #!/bin/bash -e
 
-# This file passes the devices and the build arguments for a build script
-# that calls the PAC-rom build script with the said arguments one-by-one
+# This file prepares a build environment and passes the devices to build for a build script
+# that calls the build commands per device one-by-one
 
-#devices to build
-device+=(anzu_c3)
-device+=(coconut_c3)
-device+=(haida_c3)
-device+=(hallon_c3)
-device+=(iyokan_c3)
-device+=(mango_c3)
-device+=(satsuma_c3)
-device+=(smultron_c3)
-device+=(urushi_c3)
-#device+=(honami_c3)
+echo -e ""
+echo -e "Downloading prebuilts"
+vendor/cm/get-prebuilts
+echo -e ""
 
-./vendor/pac/tools/cherries.sh anzu
-./langes/build.py -v ${device[@]}
+device+=(anzu_mf)
+device+=(coconut_a)
+device+=(haida_a)
+device+=(hallon_a)
+device+=(iyokan_a)
+device+=(mango_a)
+device+=(phoenix_a)
+device+=(satsuma_a)
+device+=(smultron_a)
+device+=(urushi_a)
+device+=(zeus_a)
+
+./build.py -v ${device[@]}

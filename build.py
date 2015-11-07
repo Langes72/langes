@@ -45,26 +45,19 @@ def execute_cmd(cmd):
         sys.exit(1)
 
 # Variables
-out = os.environ.get('OUT_DIR_COMMON_BASE')
-if out == None:
-    out = os.getcwd() + '/out/target/product'
-else:
-    out = out + "/" + os.path.basename(os.getcwd()) + '/target/product'
-print('Building to %s...' % (out))
-findn = 'ro.pacrom.version='
+out = '/mnt/out/langes/system/target/product'
+findn = 'ro.cm.version='
 
 # Get start time
 ta = datetime.datetime.now().replace(microsecond=0)
 td = (time.strftime("%Y-%m-%d"))
-up_dir = (os.getcwd() + '/build_files_%s' % (td))
+up_dir = ('build_files_%s' % (td))
 if not os.path.exists(up_dir):
     os.makedirs(up_dir)
 
 # Create log file
 lf = open('%s/build_log-%s.txt' % (up_dir, td), 'w')
 print('Building started at: %s' % (ta), file=lf)
-if args.verbose:
-    print('Building started at: %s' % (ta))
 
 # Iterate through the requested devices
 for argument in args.build:
@@ -74,7 +67,7 @@ for argument in args.build:
     # build device
     print('\nBuilding %s\n' % (device))
     t1 = datetime.datetime.now().replace(microsecond=0)
-    cmd = ('./build-pac.sh -%s %s' % (opt, device))
+    cmd = ('./build-lx.sh -%s %s' % (opt, device))
     with open('%s/%s-log' % (up_dir, device), 'w') as dlf:
         subprocess.call(cmd, stdout=dlf, stderr=subprocess.STDOUT, shell=True)
     t2 = datetime.datetime.now().replace(microsecond=0)
@@ -84,35 +77,27 @@ for argument in args.build:
     fname = '%s/%s/system/build.prop' % (out, device)
     if not os.path.isfile(fname):
         print('Building of %s failed' % (device), file=lf)
-        if args.verbose:
-            print('Building of %s failed' % (device))
         continue;
     fl_prop = open(fname, "r")
     for line in fl_prop:
         if findn in line:
-            PACVERSION = line.replace(findn, '').strip()
-            rom = PACVERSION + '.zip'
+            LXVERSION = line.replace(findn, '').strip()
+            rom = 'cm-' + LXVERSION + '.zip'
             rompath = '%s/%s/%s' % (out, device, rom)
     if not os.path.isfile(rompath):
         print('Building of %s failed' % (device), file=lf)
         print('Build time for %s was: %s' % (device, dt), file=lf)
-        if args.verbose:
-            print('Building of %s failed' % (device))
-            print('Build time for %s was: %s' % (device, dt))
         continue;
     print('Build time for %s was: %s' % (device, dt), file=lf)
-    if args.verbose:
-        print('Build time for %s was: %s' % (device, dt))
+    print('Build time for %s was: %s' % (device, dt))
 
     # upload
     if not args.test:
         print('Uploading %s files' % (device), file=lf)
-        cmd = ('./langes/up.sh %s %s' % (device, up_dir))
+        cmd = ('./up.sh %s %s' % (device, up_dir))
         subprocess.call(cmd, shell=True)
         t3 = datetime.datetime.now().replace(microsecond=0)
         print('Upload added to spool at %s' % (t3), file=lf)
-        if args.verbose:
-            print('Upload added to spool at %s' % (t3))
 
     # pause before starting next build
     time.sleep(5)
