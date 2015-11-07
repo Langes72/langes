@@ -3,12 +3,11 @@
 # This file prepares a build environment and passes the devices to build for a build script
 # that calls the build commands per device one-by-one
 
-echo -e ""
-echo -e "Downloading prebuilts"
-vendor/cm/get-prebuilts
-echo -e ""
+./sync
+chmod a+x updates.sh
+./updates.sh
 
-device+=(anzu_mf)
+device+=(anzu_a)
 device+=(coconut_a)
 device+=(haida_a)
 device+=(hallon_a)

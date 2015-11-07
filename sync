@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [[ -n $(repo branch | grep auto) ]]; then
+    repo abandon auto
+fi
+
+OUT_DIR=/mnt/out/langes/lx
+
+if [ ! -d ".repo" ]; then
+    echo -e "No .repo directory found.  Is this an Android build tree?"
+    exit 1
+fi
+
+if [ "${android}" = "" ]; then
+    android="${PWD}"
+fi
+
+repo sync vendor/extra
+
+echo -e "Refreshing manifests"
+echo ""
+
+cp -f "$android"/vendor/extra/semc.xml "$android"/.repo/local_manifests/semc.xml
+cp -f "$android"/vendor/extra/extra.xml "$android"/.repo/local_manifests/extra.xml
+cp -f "$android"/vendor/extra/updates.sh "$android"/updates.sh
+
+repo sync -j16
+export CCACHE_DIR=/home/langes/.ccache/cm12
+ccache -s

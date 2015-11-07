@@ -45,7 +45,7 @@ def execute_cmd(cmd):
         sys.exit(1)
 
 # Variables
-out = '/mnt/out/langes/system/target/product'
+out = '/mnt/out/langes/lx/target/product'
 findn = 'ro.cm.version='
 
 # Get start time
